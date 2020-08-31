@@ -26,13 +26,3 @@ html_text(price)
 webpage %>% 
   html_nodes(xpath = '//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[2]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3')
 
-//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[1]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[2]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[3]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[4]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[24]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-
-//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[1]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-
-/html/body/div[1]/div/div/div/div[2]/div[3]/div[1]/div/ul/li[1]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3/a
-
