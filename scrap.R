@@ -56,7 +56,9 @@ for (page in 1:100)
       
       #read price. Price information is located on xp_price
       xp_price<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/span"
-      price<-html_text(webpage2 %>% html_nodes(xpath = xp_price))
+      price<-webpage2 %>% 
+        html_nodes(xpath = xp_price) %>%
+        html_text()
       price<-strsplit(price, " ")[[1]][2]
       price<-as.numeric(gsub("\\.","",price))
       
