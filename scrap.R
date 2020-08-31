@@ -3,15 +3,23 @@ library('rvest')
 library(tidyr)
 library(readr)
 library(tidyverse)
+library(stringr)
 
 #initialize dataframe
 house123<-data.frame(
   ad_id=character(),
-  propertytype=character(),
-  price=character()
+  price=character(),
+  bedroom=integer(),
+  bathroom=integer(),
+  carport=integer(),
+  location=character(),
+  description=character(),
+  titledescription=character(),
+  propertytype=character()
+  
+  
 )
 
-house123<-house123 %>% add_row(ad_id=ad_id, propertytype=propertytype,price=price)
 
 #Specifying the url for desired website to be scraped
 url <- 'https://www.rumah123.com/jual/residensial/?subChannel=subsale&page=1'
@@ -29,11 +37,14 @@ for (a in 1:24)
     html_nodes(xpath = xp) %>% 
     html_attr('href')
   
+  
   #If length is not zero, then open link on href
   if (length(href)>0)
   {
     #open link to get detail specification of listing
-    webpage2<-read_html(paste("https://www.rumah123.com",prop_link,sep = ""))
+    listing_link<-paste("https://www.rumah123.com",href,sep = "")
+    print(listing_link)
+    webpage2<-read_html(listing_link)
     
     #read price. Price information is located on xp_price
     xp_price<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/span"
@@ -50,6 +61,9 @@ for (a in 1:24)
     #read land area
     xp_landarea<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[3]/ul[1]/li[2]"
     landarea<-html_text(webpage2 %>% html_nodes(xpath = xp_landarea))
+    #extract only number
+    regexp <- "[[:digit:]]+" #initialize regex to extract only number
+    landarea<-str_extract(landarea, regexp)
     
     #read title description
     xp_titledescription<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div/h2"
@@ -59,41 +73,65 @@ for (a in 1:24)
     xp_description<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div/div[1]/pre"
     description<-html_text(webpage2 %>% html_nodes(xpath=xp_description))
     
-    #read ad id
-    xp_ad_id<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[1]/div[1]/div[1]/div/div[1]/div[2]"
-    ad_id<-html_text(webpage2 %>% html_nodes(xpath=xp_ad_id))
+    #read ad id, by selecting certain div (as described on html_nodes), then extract 10 last character
+    ad_id<-webpage2 %>% 
+      html_nodes("div.property-attr-listingId.ListingAttributesstyle__AttributeItemContainer-fiaKlH.iCRKVs") %>%
+      html_text()
+    ad_id<-str_sub(ad_id,start = -10)
     
-    #read property type
-    xp_propertytype<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[1]/div[1]/div[1]/div/div[2]/div[2]"
-    propertytype<-html_text(webpage2 %>% html_nodes(xpath=xp_propertytype))
+    #read property type, split text based on colon (:) position, and extract 2nd part
+    propertytype<-webpage2 %>% 
+      html_nodes("div.property-attr-propertyType.ListingAttributesstyle__AttributeItemContainer-fiaKlH.iCRKVs") %>%
+      html_text()
+    propertytype<-strsplit(propertytype, ":")[[1]][2]
     
     #read certificate
     #xp_certificate<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[1]/div[1]/div[1]/div/div[3]/div[2]"
     #certificate<-html_text(webpage2 %>% html_nodes(xpath=xp_certificate))
     
-    #read number of bedroom
+    #read number of bedroom. If no information on number of bathroom, replace with NA
     xp_bedroom<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/ul/li[1]"
-    bedrooom<-html_text(webpage2 %>% html_nodes(xpath=xp_bedroom))
+    bedroom<-as.numeric(html_text(webpage2 %>% html_nodes(xpath=xp_bedroom)))
+    if(is_empty(bedroom))
+    {
+      bedroom<-NA
+    }
     
     #read number of bathroom
     xp_bathroom<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/ul/li[2]"
-    bathroom<-html_text(webpage2 %>% html_nodes(xpath=xp_bathroom))
+    bathroom<-as.numeric(html_text(webpage2 %>% html_nodes(xpath=xp_bathroom)))
+    if(is_empty(bathroom))
+    {
+      bathroom<-NA
+    }
     
     #read number of carport
     xp_carport<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/ul/li[3]"
-    carport<-html_text(webpage2 %>% html_nodes(xpath=xp_carport))
+    carport<-as.numeric(html_text(webpage2 %>% html_nodes(xpath=xp_carport)))
+    if(is_empty(carport))
+    {
+      carport<-NA
+    }
+    
   }
   
+  house123<-house123 %>% add_row(ad_id=ad_id, propertytype=propertytype,
+                                 price=price, bedroom=bedroom, carport=carport,
+                                 bathroom=bathroom, location=location, description=description,
+                                 titledescription=titledescription)
   
   
 }
 
-webpage2<-read_html(paste("https://www.rumah123.com",prop_link,sep = ""))
-price<-webpage2 %>%
-  html_nodes(xpath='//*[@id="app"]/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/span')
+#webpage2<-read_html(paste("https://www.rumah123.com",prop_link,sep = ""))
+#price<-webpage2 %>%
+#  html_nodes(xpath='//*[@id="app"]/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/span')
 
-html_text(price)
+#html_text(price)
 
-webpage %>% 
-  html_nodes(xpath = '//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[2]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3')
+#webpage %>% 
+#  html_nodes(xpath = '//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[2]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3')
+
+
+#ListingAttributesstyle__AttributeItemData-dogytt dCAMnf
 
