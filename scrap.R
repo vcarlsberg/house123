@@ -10,12 +10,13 @@ house123<-data.frame(
   bedroom=integer(),
   bathroom=integer(),
   carport=integer(),
-  location=character(),
   description=character(),
   titledescription=character(),
   propertytype=character(),
   buildingarea=integer(),
-  landarea=integer()
+  landarea=integer(),
+  kecamatan=character(),
+  kab_kota=character()
   
   
 )
@@ -59,9 +60,13 @@ for (page in 1:100)
       price<-strsplit(price, " ")[[1]][2]
       price<-as.numeric(gsub("\\.","",price))
       
-      #read location
-      xp_location<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/h1/span/span"
-      location<-html_text(webpage2 %>% html_nodes(xpath = xp_location))
+      #read kecamatan
+      xp_kecamatan<-"/html/body/div[1]/div/div/div/div[2]/div[1]/div/ol/li[4]/a/span"
+      kecamatan<-webpage2 %>% html_nodes(xpath = xp_kecamatan) %>% html_text()
+      
+      #read kabupaten/kota
+      xp_kab_kota<-"/html/body/div[1]/div/div/div/div[2]/div[1]/div/ol/li[3]/a/span"
+      kab_kota<-webpage2 %>% html_nodes(xpath = xp_kab_kota) %>% html_text()
       
       #read building area
       xp_buildingarea<-"/html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[3]/ul[1]/li[1]"
@@ -128,8 +133,9 @@ for (page in 1:100)
     
     house123<-house123 %>% add_row(ad_id=ad_id, propertytype=propertytype,
                                    price=price, bedroom=bedroom, carport=carport,
-                                   bathroom=bathroom, location=location, description=description,
-                                   titledescription=titledescription,landarea=landarea,buildingarea=buildingarea)
+                                   bathroom=bathroom, description=description,
+                                   titledescription=titledescription,landarea=landarea,buildingarea=buildingarea,
+                                   kab_kota=kab_kota,kecamatan=kecamatan)
     
     
   }
