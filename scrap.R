@@ -1,9 +1,6 @@
 #Loading the rvest package
-library('rvest')
-library(tidyr)
-library(readr)
+library(rvest)
 library(tidyverse)
-library(stringr)
 library(plumber)
 
 #initialize dataframe
@@ -139,16 +136,4 @@ for (page in 1:100)
 }
 
 
-
-#webpage2<-read_html(paste("https://www.rumah123.com",prop_link,sep = ""))
-#price<-webpage2 %>%
-#  html_nodes(xpath='//*[@id="app"]/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/span')
-
-#html_text(price)
-
-#webpage %>% 
-#  html_nodes(xpath = '//*[@id="app"]/div/div/div[2]/div[3]/div[1]/div/ul/li[2]/div/div[1]/div[3]/div[1]/div[1]/div[1]/h3')
-
-
-#ListingAttributesstyle__AttributeItemData-dogytt dCAMnf
 
