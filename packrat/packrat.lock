@@ -18,6 +18,12 @@ Source: RSPM
 Version: 0.4-1
 Hash: 60a5c75e57aae4a0ce76cb7422939aaf
 
+Package: ModelMetrics
+Source: RSPM
+Version: 1.2.2.2
+Hash: f38a590b9c8be113a9eebc0b29343b05
+Requires: Rcpp, data.table
+
 Package: R6
 Source: CRAN
 Version: 2.4.1
@@ -51,6 +57,11 @@ Version: 0.1.9-1
 Hash: b18d5fd446b807ab735628807d77de40
 Requires: data.table, jsonlite, xml2, foreach, doParallel, callr,
     selectr, httr, webdriver
+
+Package: SQUAREM
+Source: RSPM
+Version: 2020.4
+Hash: 78539f4c2976df036ac7b4504fa7d41c
 
 Package: SparseM
 Source: RSPM
@@ -89,6 +100,13 @@ Version: 1.2.1
 Hash: de88fed092924767ccb739b695f35d2b
 Requires: rlang, vctrs
 
+Package: broom
+Source: RSPM
+Version: 0.7.0
+Hash: b57f0c4823362594f25384820b8f7301
+Requires: backports, dplyr, ellipsis, generics, glue, purrr, rlang,
+    stringr, tibble, tidyr
+
 Package: callr
 Source: CRAN
 Version: 3.4.3
@@ -105,6 +123,13 @@ Package: carData
 Source: RSPM
 Version: 3.0-4
 Hash: 7b252bb7ef0fe748458cb0b58d8cff46
+
+Package: caret
+Source: RSPM
+Version: 6.0-86
+Hash: aee34e379f95e2125c8e9975d4deedb1
+Requires: ModelMetrics, foreach, ggplot2, pROC, plyr, recipes,
+    reshape2, withr
 
 Package: cellranger
 Source: CRAN
@@ -153,6 +178,13 @@ Package: data.table
 Source: CRAN
 Version: 1.13.0
 Hash: 7ac8e8514f185a5415ecc95ccbc50e1a
+
+Package: dbplyr
+Source: RSPM
+Version: 1.4.4
+Hash: 0c470c4652f00e293b154149ee94980a
+Requires: DBI, R6, assertthat, blob, dplyr, glue, lifecycle, magrittr,
+    purrr, rlang, tibble, tidyselect
 
 Package: debugme
 Source: CRAN
@@ -205,6 +237,12 @@ Source: CRAN
 Version: 2.0.3
 Hash: 29a358c21cb8de2e424cbec6b6be6553
 
+Package: fastDummies
+Source: RSPM
+Version: 1.6.1
+Hash: 0268225a96992314bdf81cd78406960f
+Requires: data.table, stringi, tibble
+
 Package: forcats
 Source: RSPM
 Version: 0.5.0
@@ -237,6 +275,11 @@ Package: glue
 Source: CRAN
 Version: 1.4.1
 Hash: 740ccee1066d96aeb3f4d1e571245913
+
+Package: gower
+Source: RSPM
+Version: 0.2.2
+Hash: 136a04c75fb64c0ec16f69bcd1017de5
 
 Package: gtable
 Source: CRAN
@@ -278,6 +321,12 @@ Version: 1.4.2
 Hash: 2ad813eba37ce1f357434789aa8b6132
 Requires: R6, curl, jsonlite, mime, openssl
 
+Package: ipred
+Source: RSPM
+Version: 0.9-9
+Hash: e5c991ba37200040672dc0dc06b0a180
+Requires: prodlim
+
 Package: isoband
 Source: RSPM
 Version: 0.2.2
@@ -310,6 +359,12 @@ Source: CRAN
 Version: 1.1.0.1
 Hash: 0c6d0dbad70a1b8698919b5d70e8a430
 Requires: BH, Rcpp, rlang
+
+Package: lava
+Source: RSPM
+Version: 1.6.7
+Hash: 132a512c19a08b8c4e06c5e13694cae2
+Requires: SQUAREM, numDeriv
 
 Package: lifecycle
 Source: CRAN
@@ -362,6 +417,13 @@ Version: 1.2.4
 Hash: 945def6756223e73c228d36b98fa719e
 Requires: Rcpp
 
+Package: modelr
+Source: RSPM
+Version: 0.1.8
+Hash: 928bb1b05c02dc49cdb3c75ab39647ec
+Requires: broom, magrittr, purrr, rlang, tibble, tidyr, tidyselect,
+    vctrs
+
 Package: munsell
 Source: CRAN
 Version: 0.5.0
@@ -372,6 +434,11 @@ Package: nloptr
 Source: RSPM
 Version: 1.2.2.2
 Hash: 7dc35284ad3b1c84440237c0010c2682
+
+Package: numDeriv
+Source: RSPM
+Version: 2016.8-1.1
+Hash: 4655a089f4d8b80268adaf83d6cd5fb2
 
 Package: openssl
 Source: CRAN
@@ -384,6 +451,12 @@ Source: RSPM
 Version: 4.1.5
 Hash: cb063d8c8c99a5a2e8f769f09cf799ad
 Requires: Rcpp, stringi, zip
+
+Package: pROC
+Source: RSPM
+Version: 1.16.2
+Hash: 34c378b09ba358647600a35ef3d70c11
+Requires: Rcpp, plyr
 
 Package: packrat
 Source: RSPM
@@ -426,6 +499,12 @@ Version: 0.4.6
 Hash: 56b7230d3ec9bfe86c17b83af6a9b011
 Requires: R6, crayon, httpuv, jsonlite, stringi
 
+Package: plyr
+Source: RSPM
+Version: 1.8.6
+Hash: 843fdf947862e66a51fc94b930519abc
+Requires: Rcpp
+
 Package: png
 Source: CRAN
 Version: 0.1-7
@@ -446,6 +525,12 @@ Source: CRAN
 Version: 3.4.3
 Hash: 7bfe7314749a60dfaf93985b6e541e24
 Requires: R6, ps
+
+Package: prodlim
+Source: RSPM
+Version: 2019.11.13
+Hash: 6b41ddb1a4247594e3b9ced507b6ffac
+Requires: Rcpp, lava
 
 Package: progress
 Source: CRAN
@@ -488,6 +573,13 @@ Version: 1.3.1
 Hash: e0d3207127ab34491c9e30c6e1e9495c
 Requires: Rcpp, cellranger, progress, tibble
 
+Package: recipes
+Source: RSPM
+Version: 0.1.13
+Hash: 02762be4b5d29071e3d05c247278f5de
+Requires: dplyr, generics, glue, gower, ipred, lifecycle, lubridate,
+    magrittr, purrr, rlang, tibble, tidyr, tidyselect, timeDate, withr
+
 Package: rematch
 Source: CRAN
 Version: 1.0.1
@@ -498,6 +590,12 @@ Source: CRAN
 Version: 0.3.0
 Hash: 2029355cb70894267c2c7557c79307fd
 Requires: callr, clipr, fs, rlang, rmarkdown, whisker, withr
+
+Package: reshape2
+Source: RSPM
+Version: 1.4.4
+Hash: 7523bbd6a9f0e07c701adf4e1365bd7b
+Requires: Rcpp, plyr, stringr
 
 Package: rio
 Source: RSPM
@@ -605,6 +703,20 @@ Source: CRAN
 Version: 1.1.0
 Hash: 1c7cea9ea925b701a93f378ec7233ee1
 Requires: ellipsis, glue, purrr, rlang, vctrs
+
+Package: tidyverse
+Source: RSPM
+Version: 1.3.0
+Hash: b909ba2b6349072c6376f95a816fe932
+Requires: broom, cli, crayon, dbplyr, dplyr, forcats, ggplot2, haven,
+    hms, httr, jsonlite, lubridate, magrittr, modelr, pillar, purrr,
+    readr, readxl, reprex, rlang, rstudioapi, rvest, stringr, tibble,
+    tidyr, xml2
+
+Package: timeDate
+Source: RSPM
+Version: 3043.102
+Hash: bf9c128558c5730c3fbaf9ea5196e4bc
 
 Package: tinytex
 Source: CRAN
