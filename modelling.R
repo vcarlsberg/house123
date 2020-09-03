@@ -7,20 +7,20 @@ library(tidyverse)
 modelling_data<-house123 %>% distinct(description, .keep_all= TRUE) %>% 
   filter(propertytype=="Rumah")
 
-house123.tibble<-as_tibble(house123)
+#house123.tibble<-as_tibble(house123)
 
-modelling_data<-dummy_columns(modelling_data,select_columns="kab_kota",
-                              remove_first_dummy = TRUE)
+#modelling_data<-dummy_columns(modelling_data,select_columns="kab_kota",
+#                              remove_first_dummy = TRUE)
 
-modelling_data<-modelling_data %>% dplyr::select(!c(ad_id,description,titledescription,propertytype,kecamatan,kab_kota))
+#modelling_data<-modelling_data %>% dplyr::select(!c(ad_id,description,titledescription,propertytype,kecamatan,kab_kota))
 
-linear.model<-lm(price~.,data = modelling_data)
+linear.model<-lm(price~bedroom+buildingarea+landarea+bathroom,data = modelling_data)
 summary(linear.model)
 
-#vif(linear.model)
+vif(linear.model)
 
 #df.predict<-data.frame(bedroom=3,bathroom=2,carport=0,buildingarea=90,landarea=105)
-#predict(linear.model, df.predict)
+#as.numeric(predict(linear.model, df.predict))
 
 
 
