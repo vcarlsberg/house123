@@ -1,6 +1,5 @@
 #Loading the rvest package
 library(rvest)
-library(plumber)
 library(dplyr)
 
 #initialize dataframe
