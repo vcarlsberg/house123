@@ -5,7 +5,7 @@ library(fastDummies)
 library(tidyverse)
 
 modelling_data<-house123 %>% distinct(description, .keep_all= TRUE) %>% 
-  filter(propertytype=="Rumah")
+  filter(propertytype=="Rumah" & bedroom>0 & bathroom>0)
 
 #house123.tibble<-as_tibble(house123)
 

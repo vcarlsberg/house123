@@ -3,15 +3,17 @@
 #* Get calculation of house
 #* @param bedroom How many bedroom available?
 #* @param bathroom How many bathroom available?
+#* @param carport What's the size of carport? 1 cars, 2 cars?
 #* @param landarea What's the size of landarea?
 #* @param buildingarea Size of building area?
 #* @post /houseprice
 function (bedroom,bathroom,landarea,buildingarea){
   df.predict<-data.frame(bedroom=as.numeric(bedroom),
                          bathroom=as.numeric(bathroom),
+                         carport=as.numeric(carport),
                          landarea=as.numeric(landarea),
                          buildingarea=as.numeric(buildingarea))
-  as.numeric(predict(linear.model, df.predict))
+  as.numeric(predict(pcr.model, df.predict))
 }
 
 
