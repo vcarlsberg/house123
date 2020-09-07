@@ -7,13 +7,21 @@
 #* @param landarea What's the size of landarea?
 #* @param buildingarea Size of building area?
 #* @post /houseprice
-function (bedroom,bathroom,landarea,buildingarea){
-  df.predict<-data.frame(bedroom=as.numeric(bedroom),
-                         bathroom=as.numeric(bathroom),
-                         carport=as.numeric(carport),
-                         landarea=as.numeric(landarea),
-                         buildingarea=as.numeric(buildingarea))
-  as.numeric(predict(pcr.model, df.predict))
+function (bedroom,bathroom,carport,landarea,buildingarea,res){
+  if(missing(bedroom)|missing(bathroom)|missing(carport)|missing(landarea)|missing(buildingarea))
+  {
+    res$status<-400
+  }else{
+    res$status<-200
+    df.predict<-data.frame(bedroom=as.numeric(bedroom),
+                           bathroom=as.numeric(bathroom),
+                           carport=as.numeric(carport),
+                           landarea=as.numeric(landarea),
+                           buildingarea=as.numeric(buildingarea))
+    as.numeric(predict(pcr.model, df.predict,ncomp = selectNcomp(pcr.model)))    
+  }
+
+
 }
 
 
@@ -36,7 +44,32 @@ function() {
 #* @param a The first number to add
 #* @param b The second number to add
 #* @post /sum
-function(a, b) {
-  as.numeric(a) + as.numeric(b)
+function(a, b,res,req) {
+  if (missing(a)|missing(a))
+  {
+    res$status <- 404 # Unauthorized
+    
+    return(res)
+
+#    list(error = "Feature x is missing.")
+#    res$body <- jsonlite::toJSON(auto_unbox = TRUE, list(
+#      status = 400,
+#      message = "Missing required 'id' parameter."
+#    ))
+    
+#    res$status<-400
+#    return(res)
+  }else{
+    as.numeric(a) + as.numeric(b)  
+  }
+  
 }
 
+
+#' Generate a friendly error
+#' @get /friendly
+function(res){
+  msg <- "Your request did not include a required parameter."
+  res$status <- 400 # Bad request
+  list(error=jsonlite::unbox(msg))
+}
