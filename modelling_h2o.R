@@ -11,9 +11,14 @@ modelling_data$kecamatan<-as.factor(modelling_data$kecamatan)
 
 h2o_input<-as.h2o(modelling_data)
 
-aml <- h2o.deeplearning(x = c(3,4,5,9,10,11,12), y = 2,
+aml <- h2o.deeplearning(x = c(3,4,5,9,10,11,12),y = 2,
                   training_frame = h2o_input,
                   seed = 72,standardize = TRUE,nfolds = 10)
+
+aml <- h2o.automl(x = c(3,4,5,9,10,11,12), y = 2,
+                        training_frame = h2o_input,
+                        seed = 72,include_algos = c("DeepLearning"))
+
 
 #summary(aml)
 #aml
